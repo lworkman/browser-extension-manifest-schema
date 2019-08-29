@@ -1,0 +1,766 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "definitions": {
+    "APIPermissions": {
+      "enum": [
+        "activeTab",
+        "background",
+        "bookmarks",
+        "browserSettings",
+        "clipboardRead",
+        "clipboardWrite",
+        "contentSettings",
+        "contextMenus",
+        "cookies",
+        "debugger",
+        "downloads",
+        "downloads.open",
+        "find",
+        "geolocation",
+        "history",
+        "idle",
+        "management",
+        "notifications",
+        "pageCapture",
+        "tabHide",
+        "tabs",
+        "topSites",
+        "webNavigation",
+        "webRequest",
+        "webRequestBlocking"
+      ],
+      "type": "string"
+    },
+    "HostPermissions": {
+      "enum": [
+        "activeTab",
+        "alarms",
+        "background",
+        "bookmarks",
+        "browserSettings",
+        "browsingData",
+        "clipboardRead",
+        "clipboardWrite",
+        "contentSettings",
+        "contextMenus",
+        "contextualIdentities",
+        "cookies",
+        "debugger",
+        "dns",
+        "downloads",
+        "downloads.open",
+        "find",
+        "geolocation",
+        "history",
+        "identity",
+        "idle",
+        "management",
+        "menus",
+        "menus.overrideContext",
+        "nativeMessaging",
+        "notifications",
+        "pageCapture",
+        "pkcs11",
+        "privacy",
+        "proxy",
+        "search",
+        "sessions",
+        "storage",
+        "tabHide",
+        "tabs",
+        "theme",
+        "topSites",
+        "unlimitedStorage",
+        "webNavigation",
+        "webRequest",
+        "webRequestBlocking"
+      ],
+      "type": "string"
+    },
+    "IBackgroundPage": {
+      "properties": {
+        "page": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "IBackgroundScript": {
+      "properties": {
+        "scripts": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "properties": {
+    "author": {
+      "type": "string"
+    },
+    "background": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/IBackgroundScript"
+        },
+        {
+          "$ref": "#/definitions/IBackgroundPage"
+        }
+      ]
+    },
+    "browser_actions": {
+      "properties": {
+        "browser_style": {
+          "type": "boolean"
+        },
+        "default_area": {
+          "enum": [
+            "menupanel",
+            "navbar",
+            "personaltoolbar",
+            "tabstrip"
+          ],
+          "type": "string"
+        },
+        "default_icon": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "default_popup": {
+          "type": "string"
+        },
+        "default_title": {
+          "type": "string"
+        },
+        "theme_icons": {
+          "items": {
+            "properties": {
+              "dark": {
+                "type": "string"
+              },
+              "light": {
+                "type": "string"
+              },
+              "size": {
+                "type": "number"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "browser_specific_settings": {
+      "properties": {
+        "edge": {
+          "properties": {
+            "borwser_actions_next_to_addressbar": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "gecko": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "strict_max_version": {
+              "type": "string"
+            },
+            "strict_min_version": {
+              "type": "string"
+            },
+            "update_url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "chrome_settings_overrides": {
+      "properties": {
+        "homepage": {
+          "type": "string"
+        },
+        "search_provider": {
+          "properties": {
+            "alternate_urls": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "encoding": {
+              "type": "string"
+            },
+            "favicon_url": {
+              "type": "string"
+            },
+            "image_url": {
+              "type": "string"
+            },
+            "image_url_post_params": {
+              "type": "string"
+            },
+            "instant_url": {
+              "type": "string"
+            },
+            "instant_url_post_params": {
+              "type": "string"
+            },
+            "is_default": {
+              "type": "boolean"
+            },
+            "keyword": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "prepopulated_id": {
+              "type": "string"
+            },
+            "search_url": {
+              "type": "string"
+            },
+            "search_url_post_params": {
+              "type": "string"
+            },
+            "suggest_url": {
+              "type": "string"
+            },
+            "suggest_url_post_params": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "chrome_url_overrides": {
+      "properties": {
+        "bookmarks": {
+          "type": "string"
+        },
+        "history": {
+          "type": "string"
+        },
+        "newtab": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "commands": {
+      "additionalProperties": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "suggested_key": {
+            "properties": {
+              "chromeos": {
+                "type": "string"
+              },
+              "default": {
+                "type": "string"
+              },
+              "ios": {
+                "type": "string"
+              },
+              "linux": {
+                "type": "string"
+              },
+              "mac": {
+                "type": "string"
+              },
+              "windows": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        },
+        "type": "object"
+      },
+      "type": "object"
+    },
+    "content_scripts": {
+      "properties": {
+        "all_frames": {
+          "type": "boolean"
+        },
+        "css": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "exclude_globs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "exclude_matches": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "include_globs": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "js": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "match_about_blank": {
+          "type": "boolean"
+        },
+        "matches": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "run_at": {
+          "enum": [
+            "document_end",
+            "document_idle",
+            "document_start"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "content_security_policy": {
+      "type": "string"
+    },
+    "default_locale": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "developer": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "devtools_page": {
+      "type": "string"
+    },
+    "dictionaries": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "externally_connectable": {
+      "properties": {
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "matches": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "homepage_url": {
+      "type": "string"
+    },
+    "icons": {
+      "additionalProperties": {
+        "type": "string"
+      },
+      "type": "object"
+    },
+    "incognito": {
+      "enum": [
+        "not_allowed",
+        "spanning",
+        "split"
+      ],
+      "type": "string"
+    },
+    "manifest_version": {
+      "enum": [
+        2
+      ],
+      "type": "number"
+    },
+    "name": {
+      "type": "string"
+    },
+    "offline_enabled": {
+      "type": "boolean"
+    },
+    "omnibox": {
+      "properties": {
+        "keyword": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "optional_permissions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "options_page": {
+      "type": "string"
+    },
+    "options_ui": {
+      "properties": {
+        "browser_style": {
+          "type": "boolean"
+        },
+        "open_in_tab": {
+          "type": "boolean"
+        },
+        "page": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "page_action": {
+      "properties": {
+        "browser_style": {
+          "type": "boolean"
+        },
+        "default_icon": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "default_popup": {
+          "type": "string"
+        },
+        "default_title": {
+          "type": "string"
+        },
+        "hide_matches": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "pinned": {
+          "type": "boolean"
+        },
+        "show_matches": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "permissions": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    },
+    "protocol_handlers": {
+      "items": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "protocol": {
+            "type": "string"
+          },
+          "uriTemplate": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
+    "short_name": {
+      "type": "string"
+    },
+    "sidebar_action": {
+      "properties": {
+        "browser_style": {
+          "type": "boolean"
+        },
+        "default_icon": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "type": "string"
+              },
+              "type": "object"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        },
+        "default_panel": {
+          "type": "string"
+        },
+        "default_title": {
+          "type": "string"
+        },
+        "open_at_install": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "theme": {
+      "properties": {
+        "colors": {
+          "properties": {
+            "accentcolor": {
+              "type": "string"
+            },
+            "bookmark_text": {
+              "type": "string"
+            },
+            "button_background_active": {
+              "type": "string"
+            },
+            "button_background_hover": {
+              "type": "string"
+            },
+            "frame": {
+              "type": "string"
+            },
+            "frame_inactive": {
+              "type": "string"
+            },
+            "icons": {
+              "type": "string"
+            },
+            "icons_attention": {
+              "type": "string"
+            },
+            "ntp_background": {
+              "type": "string"
+            },
+            "ntp_text": {
+              "type": "string"
+            },
+            "popup": {
+              "type": "string"
+            },
+            "popup_border": {
+              "type": "string"
+            },
+            "popup_highlight": {
+              "type": "string"
+            },
+            "popup_highlight_text": {
+              "type": "string"
+            },
+            "popup_text": {
+              "type": "string"
+            },
+            "sidebar": {
+              "type": "string"
+            },
+            "sidebar_border": {
+              "type": "string"
+            },
+            "sidebar_highlight": {
+              "type": "string"
+            },
+            "sidebar_highlight_text": {
+              "type": "string"
+            },
+            "sidebar_text": {
+              "type": "string"
+            },
+            "tab_background_separator": {
+              "type": "string"
+            },
+            "tab_background_text": {
+              "type": "string"
+            },
+            "tab_line": {
+              "type": "string"
+            },
+            "tab_loading": {
+              "type": "string"
+            },
+            "tab_selected": {
+              "type": "string"
+            },
+            "tab_text": {
+              "type": "string"
+            },
+            "textcolor": {
+              "type": "string"
+            },
+            "toolbar": {
+              "type": "string"
+            },
+            "toolbar_bottom_separator": {
+              "type": "string"
+            },
+            "toolbar_field": {
+              "type": "string"
+            },
+            "toolbar_field_border": {
+              "type": "string"
+            },
+            "toolbar_field_border_focus": {
+              "type": "string"
+            },
+            "toolbar_field_focus": {
+              "type": "string"
+            },
+            "toolbar_field_highlight": {
+              "type": "string"
+            },
+            "toolbar_field_highlight_text": {
+              "type": "string"
+            },
+            "toolbar_field_separator": {
+              "type": "string"
+            },
+            "toolbar_field_text": {
+              "type": "string"
+            },
+            "toolbar_field_text_focus": {
+              "type": "string"
+            },
+            "toolbar_text": {
+              "type": "string"
+            },
+            "toolbar_top_separator": {
+              "type": "string"
+            },
+            "toolbar_vertical_separator": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "images": {
+          "properties": {
+            "additional_backgrounds": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "headerURL": {
+              "type": "string"
+            },
+            "theme_frame": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "properties": {
+          "properties": {
+            "additional_backgrounds_alignment": {
+              "enum": [
+                "bottom",
+                "center",
+                "center bottom",
+                "center center",
+                "center top",
+                "left",
+                "left bottom",
+                "left center",
+                "left top",
+                "right",
+                "right bottom",
+                "right center",
+                "right top",
+                "top"
+              ],
+              "type": "string"
+            },
+            "additional_backgrounds_tiling": {
+              "enum": [
+                "no-repeat",
+                "repeat",
+                "repeat-x",
+                "repeat-y"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "user_scripts": {
+      "properties": {
+        "api_script": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "version": {
+      "type": "string"
+    },
+    "version_name": {
+      "type": "string"
+    },
+    "web_accessible_resources": {
+      "items": {
+        "type": "string"
+      },
+      "type": "array"
+    }
+  }
+}
